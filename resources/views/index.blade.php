@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    @if (session('sucesso'))
+        <p> {{ session('sucesso') }}</p>
+    @endif
+    <br>
+    <a href="/produtos/create">Novo produto</a>
+    <br>
+    @foreach ($produtos as $produtos)
+        <div>
+            <p>{{ $produto->id }}</p>
+            <p>{{ $produto->nome }}</p>
+            <p>{{ $produto->preco }}</p>
+            <p>{{ $produto->created_at }}</p>   
+        </div>
+        <hr>
+    @endforeach
+</body>
+</html>
