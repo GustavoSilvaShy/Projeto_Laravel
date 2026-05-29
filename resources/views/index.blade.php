@@ -13,12 +13,22 @@
     <br>
     <a href="/produtos/create">Novo produto</a>
     <br>
-    @foreach ($produtos as $produtos)
+    @foreach ($produtos as $produto)
         <div>
+            @if($produto->imagem)
+                <img src="/{{$produto->imagem}}" style="max-width:100px;">
+
+            @endif
             <p>{{ $produto->id }}</p>
             <p>{{ $produto->nome }}</p>
-            <p>{{ $produto->preco }}</p>
-            <p>{{ $produto->created_at }}</p>   
+            <p>R$ {{number_format ($produto->preco, 2, ',', '.') }}</p>
+            <p>{{ $produto->created_at }}</p>  
+            
+            <form action="/produtos/{{ $produto->id }}" method="post" onsubmit="return confirm('Deseja excluir este produto?')">
+                @csrf
+                @method('DELETE')
+                <button type="submit">Excluir</button>
+            </form>
         </div>
         <hr>
     @endforeach

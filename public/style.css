@@ -1,0 +1,317 @@
+/* ==========================================================================
+   1. CONFIGURAÇÕES GERAIS (Glow Dark Mode)
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0b0c10; /* Fundo preto azulado premium */
+    color: #e5e7eb; /* Texto claro de alto contraste */
+    min-height: 100vh;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Esconde o <hr> nativo do HTML para usar o design de cards */
+hr {
+    display: none;
+}
+
+/* Título Principal (Usado na tela de Cadastro) */
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    background: linear-gradient(135deg, #a78bfa 0%, #f472b6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+}
+
+/* ==========================================================================
+   2. PADRONIZAÇÃO DE BOTÕES (Degradê Roxo para Rosa)
+   ========================================================================== */
+/* Aplica o estilo ao link "Novo produto" e ao botão "Salvar" */
+a[href="/produtos/create"],
+button[type="submit"]:not(div button) {
+    display: inline-block;
+    background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+    text-align: center;
+}
+
+/* Efeito Hover dos botões principais */
+a[href="/produtos/create"]:hover,
+button[type="submit"]:not(div button):hover {
+    transform: translateY(-1px);
+    opacity: 0.95;
+    box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
+}
+
+/* Efeito de clique */
+a[href="/produtos/create"]:active,
+button[type="submit"]:not(div button):active {
+    transform: translateY(1px);
+}
+
+/* Ajuste específico do botão de criar na listagem */
+a[href="/produtos/create"] {
+    margin-bottom: 30px;
+    align-self: flex-start;
+}
+
+/* ==========================================================================
+   3. MENSAGEM DE SUCESSO (Session Laravel)
+   ========================================================================== */
+p:has(+ br) {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    padding: 14px 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(10, 185, 129, 0.3);
+    margin-bottom: 25px;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   4. TELA DE LISTAGEM (Cards dos Produtos)
+   ========================================================================== */
+/* Container de cada produto no loop @foreach */
+div:not(body > form div) { 
+    background: #1f2937; /* Grafite escuro */
+    border: 1px solid #374151;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+div:not(body > form div):hover {
+    transform: translateY(-2px);
+    border-color: #4b5563;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Imagem do Produto */
+div img {
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #4b5563;
+    width: 90px;
+    height: 90px;
+}
+
+/* Textos dentro do Card */
+div p { margin: 0; }
+
+/* ID do Produto */
+div p:nth-of-type(1) {
+    font-size: 0.8rem;
+    color: #9ca3af;
+    background-color: #111827;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+/* Nome do Produto */
+div p:nth-of-type(2) {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+    flex-grow: 1; /* Empurra o preço e o botão para a extremidade direita */
+}
+
+/* Preço */
+div p:nth-of-type(3) {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #34d399; /* Verde esmeralda */
+    white-space: nowrap;
+}
+
+/* Data de Criação */
+div p:nth-of-type(4) {
+    font-size: 0.8rem;
+    color: #9ca3af;
+    white-space: nowrap;
+}
+
+/* Botão Excluir (Minimalista/Elegante) */
+div form {
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+div button[type="submit"] {
+    background: transparent;
+    color: #f87171;
+    border: 1px solid rgba(248, 113, 113, 0.4);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+div button[type="submit"]:hover {
+    background-color: #ef4444;
+    border-color: #ef4444;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+/* ==========================================================================
+   5. TELA DE CADASTRO (Estilização do Formulário)
+   ========================================================================== */
+body > form {
+    background-color: #1f2937;
+    border: 1px solid #374151;
+    border-radius: 16px;
+    padding: 40px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    margin: auto; /* Centraliza verticalmente se o body tiver min-height */
+}
+
+body > form p {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+body > form p:last-of-type {
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+body > form label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #9ca3af;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+/* Inputs de Texto e Preço no cadastro */
+body > form input[type="text"] {
+    background-color: #111827;
+    border: 1px solid #4b5563;
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: #ffffff;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+body > form input[type="text"]:focus {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+}
+
+/* Input de Upload de Imagem */
+body > form input[type="file"] {
+    background-color: #111827;
+    border: 1px dashed #4b5563;
+    border-radius: 8px;
+    padding: 10px;
+    color: #9ca3af;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+body > form input[type="file"]:hover {
+    border-color: #ec4899;
+}
+
+body > form input[type="file"]::file-selector-button {
+    background: #374151;
+    border: none;
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background 0.2s;
+}
+
+body > form input[type="file"]::file-selector-button:hover {
+    background: #4b5563;
+}
+
+/* Botão Salvar (Ocupando largura total no card de cadastro) */
+body > form button[type="submit"] {
+    width: 100%;
+    padding: 14px;
+}
+
+/* ==========================================================================
+   6. RESPONSIVIDADE (Mobile)
+   ========================================================================== */
+@media (max-width: 768px) {
+    body {
+        padding: 20px 15px;
+    }
+
+    a[href="/produtos/create"] {
+        width: 100%;
+    }
+
+    div:not(body > form div) {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: left;
+        gap: 16px;
+    }
+    
+    div:not(body > form div) p:nth-of-type(2) {
+        flex-grow: 0;
+    }
+    
+    div img {
+        width: 100%;
+        height: 180px;
+    }
+
+    div p:nth-of-type(1) {
+        align-self: flex-start;
+    }
+    
+    div form {
+        width: 100%;
+    }
+    
+    div button[type="submit"] {
+        width: 100%;
+        padding: 12px;
+    }
+    
+    body > form {
+        padding: 25px 20px;
+    }
+}

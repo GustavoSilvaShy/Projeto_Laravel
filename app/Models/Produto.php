@@ -9,5 +9,6 @@ class Produto extends Model
     protected $fillable = [
         'nome',
         'preco',
+        'imagem',
     ];
 }
