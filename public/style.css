@@ -24,7 +24,7 @@ hr {
     display: none;
 }
 
-/* Título Principal (Usado na tela de Cadastro) */
+/* Título Principal (Usado na tela de Cadastro/Edição) */
 h1 {
     font-size: 2rem;
     font-weight: 700;
@@ -38,9 +38,9 @@ h1 {
 /* ==========================================================================
    2. PADRONIZAÇÃO DE BOTÕES (Degradê Roxo para Rosa)
    ========================================================================== */
-/* Aplica o estilo ao link "Novo produto" e ao botão "Salvar" */
+/* CORREÇÃO: Ajustado o seletor para aplicar o estilo no botão "Atualizar" e no "Salvar" sem bugar */
 a[href="/produtos/create"],
-button[type="submit"]:not(div button) {
+form button[type="submit"] {
     display: inline-block;
     background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
     color: #ffffff;
@@ -58,7 +58,7 @@ button[type="submit"]:not(div button) {
 
 /* Efeito Hover dos botões principais */
 a[href="/produtos/create"]:hover,
-button[type="submit"]:not(div button):hover {
+form button[type="submit"]:hover {
     transform: translateY(-1px);
     opacity: 0.95;
     box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
@@ -66,7 +66,7 @@ button[type="submit"]:not(div button):hover {
 
 /* Efeito de clique */
 a[href="/produtos/create"]:active,
-button[type="submit"]:not(div button):active {
+form button[type="submit"]:active {
     transform: translateY(1px);
 }
 
@@ -74,6 +74,19 @@ button[type="submit"]:not(div button):active {
 a[href="/produtos/create"] {
     margin-bottom: 30px;
     align-self: flex-start;
+}
+
+/* CORREÇÃO: Estilização do link de voltar para não parecer um texto puro desalinhado */
+form p a {
+    color: #9ca3af;
+    text-decoration: none;
+    font-size: 0.95rem;
+    margin-left: 15px;
+    transition: color 0.2s;
+}
+
+form p a:hover {
+    color: #ffffff;
 }
 
 /* ==========================================================================
@@ -185,9 +198,10 @@ div button[type="submit"]:hover {
 }
 
 /* ==========================================================================
-   5. TELA DE CADASTRO (Estilização do Formulário)
+   5. TELA DE CADASTRO E EDIÇÃO (Estilização do Formulário)
    ========================================================================== */
-body > form {
+/* CORREÇÃO: Removido o '>' para aplicar o estilo do card de form tanto na criação quanto na edição */
+body form {
     background-color: #1f2937;
     border: 1px solid #374151;
     border-radius: 16px;
@@ -198,18 +212,21 @@ body > form {
     margin: auto; /* Centraliza verticalmente se o body tiver min-height */
 }
 
-body > form p {
+/* CORREÇÃO: Ajustado o seletor dos parágrafos internos do form */
+form p {
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
 }
 
-body > form p:last-of-type {
+form p:last-of-type {
     margin-bottom: 0;
     margin-top: 10px;
+    flex-direction: row; /* Mantém o botão e o voltar lado a lado */
+    align-items: center;
 }
 
-body > form label {
+form label {
     font-size: 0.9rem;
     font-weight: 600;
     color: #9ca3af;
@@ -217,8 +234,8 @@ body > form label {
     letter-spacing: 0.5px;
 }
 
-/* Inputs de Texto e Preço no cadastro */
-body > form input[type="text"] {
+/* Inputs de Texto e Preço no cadastro/edição */
+form input[type="text"] {
     background-color: #111827;
     border: 1px solid #4b5563;
     border-radius: 8px;
@@ -227,15 +244,16 @@ body > form input[type="text"] {
     font-size: 1rem;
     transition: all 0.2s ease;
     outline: none;
+    width: 100%;
 }
 
-body > form input[type="text"]:focus {
+form input[type="text"]:focus {
     border-color: #8b5cf6;
     box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
 }
 
 /* Input de Upload de Imagem */
-body > form input[type="file"] {
+form input[type="file"] {
     background-color: #111827;
     border: 1px dashed #4b5563;
     border-radius: 8px;
@@ -243,13 +261,14 @@ body > form input[type="file"] {
     color: #9ca3af;
     cursor: pointer;
     font-size: 0.9rem;
+    width: 100%;
 }
 
-body > form input[type="file"]:hover {
+form input[type="file"]:hover {
     border-color: #ec4899;
 }
 
-body > form input[type="file"]::file-selector-button {
+form input[type="file"]::file-selector-button {
     background: #374151;
     border: none;
     color: #ffffff;
@@ -260,14 +279,14 @@ body > form input[type="file"]::file-selector-button {
     transition: background 0.2s;
 }
 
-body > form input[type="file"]::file-selector-button:hover {
+form input[type="file"]::file-selector-button:hover {
     background: #4b5563;
 }
 
-/* Botão Salvar (Ocupando largura total no card de cadastro) */
-body > form button[type="submit"] {
-    width: 100%;
-    padding: 14px;
+/* Botão Salvar/Atualizar */
+form p button[type="submit"] {
+    flex: 1; /* Faz o botão ocupar o espaço disponível ao lado do link */
+    padding: 12px;
 }
 
 /* ==========================================================================
@@ -311,7 +330,7 @@ body > form button[type="submit"] {
         padding: 12px;
     }
     
-    body > form {
+    body form {
         padding: 25px 20px;
     }
 }

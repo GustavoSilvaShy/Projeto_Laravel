@@ -10,7 +10,7 @@ class ProdutoController extends Controller
     public function index() {
         $produtos = Produto::all();
 
-        return view("index", ["produtos" => $produtos]);
+        return view("index", ["produtos" => $produtos, "busca" => null]);
     }
 
     public function create() {
@@ -31,6 +31,7 @@ class ProdutoController extends Controller
             $dados['imagem'] = "images/produtos/" . $nomeImagem;
             $request->file('imagem')->move($pasta, $nomeImagem);
 
+
     }
              
         Produto::create($dados);
@@ -44,4 +45,43 @@ class ProdutoController extends Controller
 
             return redirect()->to("produtos")->with("sucesso", "Produto removido com sucesso");
             }
+
+    public function buscar(Request $request) {
+        $busca = $request->input('busca', '');
+
+        if (empty($busca)) {
+            return redirect('/produtos');
+        }
+    
+
+        $produtos = Produto::where('nome', 'like', '%' . $busca . '%')->get();
+        
+        return view("index", ["produtos" => $produtos, "busca" => $busca]);
+        }
+
+    public function edit($id) {
+        $produto = Produto::findOrFail($id);
+        return view("edit", ["produto" => $produto]);
+    }
+
+    public function update(Request $request, $id) {
+        $produto = Produto::findOrFail($id);
+
+        $dados = $request->only(['nome', 'preco']);
+
+        if ($request->hasFile('imagem')) {
+            $pasta = public_path('images/produtos');
+            $extensaoImagem = $request->file('imagem')->getClientOriginalExtension();
+            $nomeImagem =uniqid() . '.' . $extensaoImagem;
+            // 123adfdsf.png -> ahsdhsd.jpg
+
+            $dados['imagem'] = "images/produtos/" .$nomeImagem;
+
+            $request->file('imagem')->move($pasta, $nomeImagem);
+        }
+        // Salvando no banco
+        $produto->update($dados);
+
+        return redirect('/produtos')->with("sucesso", "Produto Atualizado");
+    }
 }
